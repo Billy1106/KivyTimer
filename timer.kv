@@ -1,0 +1,69 @@
+TimerWidget:
+
+<TimerWidget>
+    canvas.before:
+        Color:
+            rgba: 0.6,0.6,0.6,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        Label:
+            text: root.count
+            font_size: 100
+        BoxLayout: 
+            size_hint_y:0.3
+            Button:
+                id: Start
+                text: "Start"
+                front_size:30
+                on_press:root.start_countdown()
+            Button:
+                id: Stop
+                text: "Stop"
+                front_size:30
+                on_press:root.stop_countdown()
+            Button:
+                id: Reset
+                text: "Reset"
+                front_size:30
+                on_press:root.reset_countdown()
+            BoxLayout:
+                orientation: 'vertical'
+                BoxLayout:
+                    Button:
+                        id: hr_plus
+                        text: "Hr+"
+                        front_size:10
+                        on_press:root.set_countdown('3600')
+                    Button:
+                        id: min_plus
+                        text: "Min+"
+                        front_size:10
+                        on_press:root.set_countdown('60')
+                    Button:
+                        id: sec_plus
+                        text: "Sec+"
+                        front_size:10
+                        on_press:root.set_countdown('1')
+                BoxLayout:
+                    Button:
+                        id: hr_minus
+                        text: "Hr-"
+                        front_size:10
+                        on_press:root.set_countdown('-3600')
+                    Button:
+                        id: min_minus
+                        text: "Min-"
+                        front_size:10
+                        on_press:root.set_countdown('-60')
+                    Button:
+                        id: sec_minus
+                        text: "Sec-"
+                        front_size:10
+                        on_press:root.set_countdown('-1')
+                
+
