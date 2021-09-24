@@ -1,12 +1,8 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty
-from kivy.properties import Property
 from kivy.properties import BooleanProperty
-from kivy.uix.label import Label
 
-from kivy.core.text import LabelBase,DEFAULT_FONT
-from kivy.resources import resource_add_path
 from kivy.clock import Clock
 from kivy.config import Config
 Config.set('graphics','width','500')
@@ -16,6 +12,8 @@ Config.set('graphics','height','350')
 class TimerWidget(Widget):
     
     count = StringProperty()
+    r_color = NumericProperty()
+
     count_hr = StringProperty()
     count_min = StringProperty()
     count_sec = StringProperty()
@@ -48,7 +46,7 @@ class TimerWidget(Widget):
             self.update_time(0)
         self.stop_countdown()
 
-    def countdown(self,dt):#Require two arg
+    def countdown(self,dt):
         current_time = str(self.convert_to_sec()-1)
         if(int(current_time)<=0):
             self.update_time(0)
@@ -58,19 +56,19 @@ class TimerWidget(Widget):
     def convert_to_sec(self):
         return int(self.count_hr)*3600+int(self.count_min)*60+int(self.count_sec)
     
-    def update_time(self,num):
-        num = int(num)
-        if(num<0):
+    def update_time(self,totalSeconds):
+        totalSeconds = int(totalSeconds)
+        if(totalSeconds<0):
             return False
-        hr = str(int(num/3600))
-        min = str(int((num%3600)/60))
-        sec = str(int((num%3600)%60))
+        hr = str(int(totalSeconds/3600))
+        min = str(int((totalSeconds%3600)/60))
+        sec = str(int((totalSeconds%3600)%60))
+
         self.count_hr =  hr.zfill(2)
         self.count_min = min.zfill(2)
         self.count_sec = sec.zfill(2)
         self.count = f'{hr.zfill(2)}:{min.zfill(2)}:{sec.zfill(2)}'
         
-
 class TimerApp(App):
     def __init__(self,**kwargs):
         super(TimerApp,self).__init__(**kwargs)
